@@ -1,7 +1,122 @@
-.<!DOCTYPE html>
+   <!DOCTYPE html>
 <html>
-<body style="text-align:center;padding:100px">
-<h1>آزمایش موفقیت‌آمیز!</h1>
-<button onclick="alert('کار کرد!')">کلیک تست</button>
+<head>
+    <title>🎭 تست هک اخلاقی - کلاس</title>
+    <style>
+        body { 
+            font-family: 'Segoe UI', Tahoma; 
+            text-align: center; 
+            padding: 30px; 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 600px;
+            margin: auto;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        h1 { margin-bottom: 20px; }
+        .btn {
+            background: linear-gradient(to right, #00d4aa, #00b894);
+            color: white;
+            padding: 16px 32px;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 20px 0;
+            display: inline-block;
+            box-shadow: 0 5px 15px rgba(0,212,170,0.4);
+            transition: all 0.3s;
+        }
+        .btn:hover { transform: translateY(-3px); }
+        video { 
+            width: 100%; 
+            max-width: 400px; 
+            border: 3px solid #00d4aa; 
+            border-radius: 15px; 
+            margin: 20px auto; 
+            background: black;
+            display: block;
+        }
+        .status {
+            background: rgba(255,255,255,0.15);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎥 تست آگاهی امنیتی</h1>
+        <div class="status">
+            این یک آزمایش برای نشان دادن اهمیت حریم خصوصی است
+        </div>
+        
+        <button class="btn" onclick="startCamera()">
+            🔓 فعال کردن دوربین
+        </button>
+        
+        <video id="cameraView" autoplay muted></video>
+        
+        <div id="log" class="status">
+            🚀 سیستم آماده است
+        </div>
+        
+        <div style="margin-top: 30px; font-size: 14px; opacity: 0.8;">
+            ⚠️ این صفحه فقط برای اهداف آموزشی طراحی شده است
+        </div>
+    </div>
+
+    <script>
+    const log = document.getElementById('log');
+    
+    function addLog(msg) {
+        log.innerHTML += '<div>' + msg + '</div>';
+        log.scrollTop = log.scrollHeight;
+    }
+    
+    async function startCamera() {
+        try {
+            addLog('🔍 درخواست دسترسی به دوربین...');
+            
+            const stream = await navigator.mediaDevices.getUserMedia({
+                video: { width: 640, height: 480 },
+                audio: false
+            });
+            
+            const video = document.getElementById('cameraView');
+            video.srcObject = stream;
+            
+            addLog('✅ دوربین فعال شد!');
+            addLog('📡 تصویر زنده در حال نمایش است');
+            addLog('👁️ در حمله واقعی، این تصویر برای مهاجم ارسال می‌شد');
+            
+            // تغییر دکمه
+            const btn = document.querySelector('.btn');
+            btn.innerHTML = '✅ دوربین فعال شد';
+            btn.style.background = 'linear-gradient(to right, #00b894, #00b894)';
+            btn.onclick = null;
+            
+        } catch(err) {
+            addLog('❌ خطا: ' + err.message);
+            addLog('🔧 دلیل: نیاز به HTTPS یا اجازه کاربر');
+        }
+    }
+    
+    addLog('🌐 صفحه با HTTPS بارگذاری شد');
+    addLog('📱 از گوشی می‌توانید تست کنید');
+    </script>
 </body>
 </html>
+
+ 
